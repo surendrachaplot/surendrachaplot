@@ -266,57 +266,68 @@ permalink: /books/
     flex-shrink: 0;
   }
 
-  /* ── SITE NAV ── */
+  /* ── SITE NAV + FOOTER — matches style.css exactly ── */
+  :root {
+    --sc-text: #111111;
+    --sc-muted: #555555;
+    --sc-border: #e5e5e5;
+    --sc-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --sc-max: 660px;
+  }
   .site-header {
-    max-width: 100%;
-    padding: 2rem 2.5em 1.5rem;
-    border-bottom: 1px solid rgba(17,17,17,0.12);
+    font-family: var(--sc-font);
+    max-width: var(--sc-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: 2.5rem 1.5rem 2rem;
+    border-bottom: 1px solid var(--sc-border);
+    margin-bottom: 0;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-bottom: 0;
+    box-sizing: border-box;
   }
   .site-name {
-    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
-    font-size: 0.9rem;
+    font-family: var(--sc-font);
+    font-size: 1rem;
     font-weight: 600;
-    color: #111;
+    color: var(--sc-text);
     text-decoration: none;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.01em;
   }
-  .site-name:hover { color: rgba(17,17,17,0.5); }
+  .site-name:hover { color: var(--sc-muted); }
   .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   .site-nav a {
-    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
-    font-size: 0.75rem;
-    color: rgba(17,17,17,0.5);
+    font-family: var(--sc-font);
+    font-size: 0.875rem;
+    color: var(--sc-muted);
     text-decoration: none;
-    letter-spacing: 0.06em;
+    transition: color 0.15s;
   }
-  .site-nav a:hover { color: #111; }
-  .site-nav a.active { color: #d0381f; }
-
-  /* ── SITE FOOTER ── */
+  .site-nav a:hover { color: var(--sc-text); }
+  .site-nav a.active { color: var(--sc-text); font-weight: 600; }
   .site-footer {
-    max-width: 100%;
-    margin: 0 2.5em;
-    padding: 1.5rem 0 2rem;
-    border-top: 1px solid rgba(17,17,17,0.1);
+    font-family: var(--sc-font);
+    max-width: var(--sc-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem 1.5rem 2.5rem;
+    margin-top: 0;
+    border-top: 1px solid var(--sc-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.13em;
-    color: rgba(17,17,17,0.35);
+    font-size: 0.8rem;
+    color: var(--sc-muted);
+    box-sizing: border-box;
   }
   .site-footer-links { display: flex; gap: 1.25rem; }
-  .site-footer a { color: rgba(17,17,17,0.35); text-decoration: none; }
-  .site-footer a:hover { color: #d0381f; }
+  .site-footer a { color: var(--sc-muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--sc-text); }
 </style>
 </head>
 <body>
@@ -340,7 +351,7 @@ permalink: /books/
   </div>
   <div class="stats">
     <div class="stat">
-      <span class="stat-num accent">43</span>
+      <span class="stat-num accent">42</span>
       <span class="stat-label">Read</span>
     </div>
     <div class="stat">
@@ -453,7 +464,6 @@ permalink: /books/
   <tr><td><div class="td-country"><span class="pip read"></span>Afghanistan</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=A+Thousand+Splendid+Suns+Khaled+Hosseini" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8579790-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>A Thousand Splendid Suns</em></a></td><td class="td-author">Khaled Hosseini</td><td><span class="badge read">Read</span></td></tr>
   <tr><td><div class="td-country"><span class="pip read"></span>India</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Midnight%27s+Children+Salman+Rushdie" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8346713-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Midnight's Children + many</em></a></td><td class="td-author">Rushdie, Dalrymple, Ghosh, Mistry…</td><td><span class="badge read">Read</span></td></tr>
   <tr><td><div class="td-country"><span class="pip read"></span>Iran</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Persepolis+Marjane+Satrapi" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/12648921-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Persepolis / Enlightenment of the Greengage Tree</em></a></td><td class="td-author">Satrapi, Azar</td><td><span class="badge read">Read</span></td></tr>
-  <tr><td><div class="td-country"><span class="pip read"></span>Occupied Palestine</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Sapiens+Yuval+Noah+Harari" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8634250-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Sapiens / Homo Deus</em></a></td><td class="td-author">Yuval Noah Harari</td><td><span class="badge read">Read</span></td></tr>
   <tr><td><div class="td-country"><span class="pip read"></span>Occupied Palestine</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Minor+Detail+Adania+Shibli" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/12633646-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Minor Detail</em></a></td><td class="td-author">Adania Shibli</td><td><span class="badge read">Read</span></td></tr>
   <tr><td><div class="td-country"><span class="pip read"></span>Japan</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Kafka+on+the+Shore+Murakami" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/4982600-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Murakami, Kawakami, Murata, Tanizaki…</em></a></td><td class="td-author">20+ books</td><td><span class="badge read">Read</span></td></tr>
   <tr><td><div class="td-country"><span class="pip read"></span>Lebanon</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=From+Beirut+to+Jerusalem+Thomas+Friedman" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/222972-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>From Beirut to Jerusalem</em></a></td><td class="td-author">Thomas Friedman</td><td><span class="badge read">Read</span></td></tr>
