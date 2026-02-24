@@ -1,0 +1,501 @@
+---
+layout: null
+permalink: /books/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A book from every country — Surendra Chaplot</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    max-width: none;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: Verdana, 'Bitstream Vera Sans', Geneva, sans-serif;
+    background: #ffffff;
+    color: #111111;
+    line-height: 1.8;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 4em 2.5em 3em;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2em;
+    flex-wrap: wrap;
+  }
+
+  .header-left { }
+
+  .back-link {
+    display: inline-block;
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(17,17,17,0.4);
+    text-decoration: none;
+    margin-bottom: 1em;
+  }
+  .back-link:hover { color: #d0381f; }
+
+  h1 {
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 1.55em;
+    font-weight: 400;
+    color: #111111;
+    margin-bottom: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .intro {
+    font-size: 0.82rem;
+    color: rgba(17,17,17,0.5);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex;
+    gap: 3em;
+    flex-shrink: 0;
+  }
+  .stat-num {
+    display: block;
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #111111;
+    line-height: 1;
+  }
+  .stat-num.accent { color: #d0381f; }
+  .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(17,17,17,0.4);
+  }
+
+  /* ── LEGEND ── */
+  .legend-bar {
+    padding: 0.9em 2.5em;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    background: #fafafa;
+  }
+  .legend-item {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(17,17,17,0.45);
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+  }
+  .pip {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pip.read   { background: #d0381f; }
+  .pip.queued { background: rgba(17,17,17,0.28); }
+  .pip.gap    { background: transparent; border: 1px solid rgba(17,17,17,0.22); }
+
+  /* ── MAIN ── */
+  .main { padding: 0 2.5em 6em; }
+
+  /* ── CONTINENT SECTION ── */
+  .continent { margin-top: 3.5em; }
+
+  h2 {
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(17,17,17,0.35);
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
+    margin-bottom: 0;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    font-family: Verdana, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(17,17,17,0.35);
+    text-align: left;
+    padding: 0.9em 1.2em 0.6em 0;
+    border: none !important;
+  }
+  thead th:first-child { padding-left: 0; width: 22%; }
+  thead th:nth-child(2) { width: 35%; }
+  thead th:nth-child(3) { width: 28%; }
+  thead th:last-child  { width: 15%; }
+
+  tbody tr {
+    border: none !important;
+  }
+  tbody tr:last-child { border: none !important; }
+
+  table, thead, tbody, tfoot, tr, td, th { border: none !important; }
+
+  td {
+    font-size: 0.82rem;
+    padding: 0.6em 1.2em 0.6em 0;
+    vertical-align: middle;
+    color: #111111;
+    border: none !important;
+  }
+  td:first-child { padding-left: 0; }
+
+  /* country cell */
+  .td-country {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  /* book title */
+  .td-book { font-style: italic; }
+
+  /* author */
+  .td-author { color: rgba(17,17,17,0.5); font-size: 0.78rem; }
+
+  /* status badge */
+  .badge {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .badge.read   { color: #d0381f; }
+  .badge.queued { color: rgba(17,17,17,0.45); }
+  .badge.gap    { color: rgba(17,17,17,0.25); }
+
+  /* dim gap rows */
+  tr.row-gap .td-country { color: rgba(17,17,17,0.38); }
+  tr.row-gap .td-book    { color: rgba(17,17,17,0.35); font-style: normal; }
+  tr.row-gap .td-author  { color: rgba(17,17,17,0.25); }
+
+  /* "try" prefix for suggestions */
+  .try-tag {
+    font-style: normal;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(17,17,17,0.25);
+    margin-right: 0.25em;
+  }
+
+  /* combined gap row (list of small countries) */
+  tr.row-combined td { padding-top: 0.35em; padding-bottom: 0.35em; }
+  .combined-countries {
+    font-size: 0.72rem;
+    color: rgba(17,17,17,0.3);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin: 0 2.5em;
+    padding: 1.8em 0;
+    border-top: 1px solid rgba(17,17,17,0.1);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(17,17,17,0.3);
+  }
+  .page-footer a { color: rgba(17,17,17,0.3); text-decoration: none; }
+  .page-footer a:hover { color: #d0381f; }
+
+  @media (max-width: 900px) {
+    .page-header { flex-direction: column; align-items: flex-start; }
+    .stats { gap: 1.8em; }
+    /* Hide Author and Status columns — pip colour carries status signal */
+    thead th:nth-child(3), td:nth-child(3),
+    thead th:nth-child(4), td:nth-child(4) { display: none; }
+    /* Rebalance remaining two columns */
+    thead th:first-child { width: 38%; }
+    thead th:nth-child(2) { width: 62%; }
+    /* Smaller covers on mobile */
+    .book-cover { height: 64px; }
+    .page-header { padding: 2.5em 1.2em 2em; }
+    .legend-bar { padding: 0.9em 1.2em; }
+    .main { padding: 0 1.2em 4em; }
+    .page-footer { margin: 0 1.2em; }
+  }
+
+  .book-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .book-link:hover { color: #d0381f; }
+  .book-cover {
+    height: 108px;
+    width: auto;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-left">
+<h1>A book from every country</h1>
+    <p class="intro">Reading my way around the world — one country at a time. 195 countries.</p>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num accent">42</span>
+      <span class="stat-label">Read</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">29</span>
+      <span class="stat-label">On the list</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">124</span>
+      <span class="stat-label">To find</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="legend-item"><span class="pip read"></span> Read</div>
+  <div class="legend-item"><span class="pip queued"></span> On my list</div>
+  <div class="legend-item"><span class="pip gap"></span> Need a book — suggestions welcome</div>
+</div>
+
+<div class="main">
+
+<!-- ═══ AFRICA ═══ -->
+<div class="continent">
+<h2>Africa</h2>
+<table>
+<thead><tr>
+  <th>Country</th><th>Book</th><th>Author</th><th>Status</th>
+</tr></thead>
+<tbody>
+  <tr><td><div class="td-country"><span class="pip read"></span>Egypt</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Slipping+Mohamed+Kheir" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10550521-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Slipping</em></a></td><td class="td-author">Mohamed Kheir</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Libya</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=In+the+Country+of+Men+Hisham+Matar" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/1474561-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>In the Country of Men / The Return</em></a></td><td class="td-author">Hisham Matar</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Nigeria</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Things+Fall+Apart+Chinua+Achebe" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/12816943-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Things Fall Apart / Half of a Yellow Sun</em></a></td><td class="td-author">Achebe, Adichie</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Senegal</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=At+Night+All+Blood+Is+Black+David+Diop" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10112533-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>At Night All Blood Is Black</em></a></td><td class="td-author">David Diop</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Togo</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=An+African+in+Greenland+Kpomassie" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/7381638-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>An African in Greenland</em></a></td><td class="td-author">Tété-Michel Kpomassie</td><td><span class="badge read">Read</span></td></tr>
+
+  <tr><td><div class="td-country"><span class="pip queued"></span>Algeria</div></td><td class="td-book">The Wretched of the Earth</td><td class="td-author">Frantz Fanon</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Ethiopia</div></td><td class="td-book">The Emperor</td><td class="td-author">Ryszard Kapuściński</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Ghana</div></td><td class="td-book">Homegoing</td><td class="td-author">Yaa Gyasi</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Ivory Coast</div></td><td class="td-book">In the Company of Men</td><td class="td-author">Véronique Tadjo</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Kenya</div></td><td class="td-book">The Perfect Nine</td><td class="td-author">Ngũgĩ wa Thiong'o</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Liberia</div></td><td class="td-book">She Would Be King</td><td class="td-author">Wayétu Moore</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Morocco</div></td><td class="td-book">The Travels of Ibn Battutah</td><td class="td-author">Ibn Battuta</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Rwanda</div></td><td class="td-book">The Girl Who Smiled Beads</td><td class="td-author">Clemantine Wamariya</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Somalia</div></td><td class="td-book">The Fortune Men</td><td class="td-author">Nadifa Mohamed</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>South Africa</div></td><td class="td-book">Born a Crime</td><td class="td-author">Trevor Noah</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Tanzania</div></td><td class="td-book">Afterlives</td><td class="td-author">Abdulrazak Gurnah</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Uganda</div></td><td class="td-book">Kintu</td><td class="td-author">Jennifer Nansubuga Makumbi</td><td><span class="badge queued">On list</span></td></tr>
+
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Angola</div></td><td class="td-book"><span class="try-tag">try</span>The Book of Chameleons</td><td class="td-author">José Eduardo Agualusa</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Botswana</div></td><td class="td-book"><span class="try-tag">try</span>The No. 1 Ladies' Detective Agency</td><td class="td-author">Alexander McCall Smith</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Burkina Faso</div></td><td class="td-book"><span class="try-tag">try</span>The Parachute Drop</td><td class="td-author">Norbert Zongo</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Cameroon</div></td><td class="td-book"><span class="try-tag">try</span>Houseboy</td><td class="td-author">Ferdinand Oyono</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Congo (DRC)</div></td><td class="td-book"><span class="try-tag">try</span>Johnny Mad Dog</td><td class="td-author">Emmanuel Dongala</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Guinea</div></td><td class="td-book"><span class="try-tag">try</span>The Dark Child</td><td class="td-author">Camara Laye</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Madagascar</div></td><td class="td-book"><span class="try-tag">try</span>Beyond the Rice Fields</td><td class="td-author">Naivo</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Malawi</div></td><td class="td-book"><span class="try-tag">try</span>The Boy Who Harnessed the Wind</td><td class="td-author">William Kamkwamba</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Mali</div></td><td class="td-book"><span class="try-tag">try</span>Ambiguous Adventure</td><td class="td-author">Cheikh Hamidou Kane</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Mozambique</div></td><td class="td-book"><span class="try-tag">try</span>Sleepwalking Land</td><td class="td-author">Mia Couto</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Sierra Leone</div></td><td class="td-book"><span class="try-tag">try</span>A Long Way Gone</td><td class="td-author">Ishmael Beah</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>South Sudan</div></td><td class="td-book"><span class="try-tag">try</span>What Is the What</td><td class="td-author">Dave Eggers</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Sudan</div></td><td class="td-book"><span class="try-tag">try</span>Season of Migration to the North</td><td class="td-author">Tayeb Salih</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Tunisia</div></td><td class="td-book"><span class="try-tag">try</span>The Bliss of Being Tired</td><td class="td-author">Hassouna Mosbahi</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Zambia</div></td><td class="td-book"><span class="try-tag">try</span>The Old Drift</td><td class="td-author">Namwali Serpell</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Zimbabwe</div></td><td class="td-book"><span class="try-tag">try</span>We Need New Names</td><td class="td-author">NoViolet Bulawayo</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-combined row-gap"><td colspan="4"><div class="td-country" style="margin-bottom:0.2em"><span class="pip gap"></span><span style="font-size:0.68rem;color:rgba(17,17,17,0.3);text-transform:uppercase;letter-spacing:0.1em">Suggestions welcome</span></div><div class="combined-countries">Benin · Burundi · Cabo Verde · CAR · Chad · Comoros · Congo (Republic) · Djibouti · Equatorial Guinea · Eritrea · Eswatini · Gabon · Gambia · Guinea-Bissau · Lesotho · Mauritania · Mauritius · Namibia · Niger · Sao Tome &amp; Principe · Seychelles</div></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ AMERICAS ═══ -->
+<div class="continent">
+<h2>Americas</h2>
+<table>
+<thead><tr>
+  <th>Country</th><th>Book</th><th>Author</th><th>Status</th>
+</tr></thead>
+<tbody>
+  <tr><td><div class="td-country"><span class="pip read"></span>Argentina</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=In+Patagonia+Bruce+Chatwin" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/94640-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>In Patagonia / A Musical Offering</em></a></td><td class="td-author">Chatwin, Sagasti</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Chile</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=When+We+Cease+to+Understand+the+World+Labatut" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/11416803-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>When We Cease to Understand the World</em></a></td><td class="td-author">Benjamín Labatut</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Colombia</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Oblivion+Abad+Faciolince" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/2293071-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Oblivion: A Memoir</em></a></td><td class="td-author">Héctor Abad Faciolince</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Cuba</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Motorcycle+Diaries+Che+Guevara" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/923234-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Motorcycle Diaries</em></a></td><td class="td-author">Che Guevara</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Dominican Republic</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Brief+Wondrous+Life+of+Oscar+Wao+Junot+Diaz" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/12451659-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Brief Wondrous Life of Oscar Wao</em></a></td><td class="td-author">Junot Díaz</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Mexico</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Loop+Brenda+Lozano" target="_blank" rel="noopener" class="book-link"><em>Loop</em></a></td><td class="td-author">Brenda Lozano</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Trinidad &amp; Tobago</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Mermaid+of+Black+Conch+Monique+Roffey" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10481917-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Mermaid of Black Conch</em></a></td><td class="td-author">Monique Roffey</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>USA</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=A+Promised+Land+Barack+Obama" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10449357-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>A Promised Land + many</em></a></td><td class="td-author">Obama, Feynman, DFW…</td><td><span class="badge read">Read</span></td></tr>
+
+  <tr><td><div class="td-country"><span class="pip queued"></span>Brazil</div></td><td class="td-book">The Passion According to G.H.</td><td class="td-author">Clarice Lispector</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Canada</div></td><td class="td-book">The Blind Assassin</td><td class="td-author">Margaret Atwood</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Venezuela</div></td><td class="td-book">Bolívar: American Liberator</td><td class="td-author">Marie Arana</td><td><span class="badge queued">On list</span></td></tr>
+
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Bolivia</div></td><td class="td-book"><span class="try-tag">try</span>The Vice of Art</td><td class="td-author">Giovanna Rivero</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Guatemala</div></td><td class="td-book"><span class="try-tag">try</span>Men of Maize</td><td class="td-author">Miguel Ángel Asturias</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Haiti</div></td><td class="td-book"><span class="try-tag">try</span>Masters of the Dew</td><td class="td-author">Jacques Roumain</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Peru</div></td><td class="td-book"><span class="try-tag">try</span>The Time of the Hero</td><td class="td-author">Mario Vargas Llosa</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Uruguay</div></td><td class="td-book"><span class="try-tag">try</span>The Truce</td><td class="td-author">Mario Benedetti</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-combined row-gap"><td colspan="4"><div class="td-country" style="margin-bottom:0.2em"><span class="pip gap"></span><span style="font-size:0.68rem;color:rgba(17,17,17,0.3);text-transform:uppercase;letter-spacing:0.1em">Suggestions welcome</span></div><div class="combined-countries">Antigua &amp; Barbuda · Bahamas · Barbados · Belize · Costa Rica · Dominica · Ecuador · El Salvador · Grenada · Guyana · Honduras · Jamaica · Nicaragua · Panama · Paraguay · Saint Kitts &amp; Nevis · Saint Lucia · Saint Vincent · Suriname</div></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ ASIA ═══ -->
+<div class="continent">
+<h2>Asia</h2>
+<table>
+<thead><tr>
+  <th>Country</th><th>Book</th><th>Author</th><th>Status</th>
+</tr></thead>
+<tbody>
+  <tr><td><div class="td-country"><span class="pip read"></span>Afghanistan</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=A+Thousand+Splendid+Suns+Khaled+Hosseini" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8579790-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>A Thousand Splendid Suns</em></a></td><td class="td-author">Khaled Hosseini</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>India</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Midnight%27s+Children+Salman+Rushdie" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8346713-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Midnight's Children + many</em></a></td><td class="td-author">Rushdie, Dalrymple, Ghosh, Mistry…</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Iran</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Persepolis+Marjane+Satrapi" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/12648921-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Persepolis / Enlightenment of the Greengage Tree</em></a></td><td class="td-author">Satrapi, Azar</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Israel</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Sapiens+Yuval+Noah+Harari" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8634250-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Sapiens / Homo Deus</em></a></td><td class="td-author">Yuval Noah Harari</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Japan</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Kafka+on+the+Shore+Murakami" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/4982600-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Murakami, Kawakami, Murata, Tanizaki…</em></a></td><td class="td-author">20+ books</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Lebanon</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=From+Beirut+to+Jerusalem+Thomas+Friedman" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/222972-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>From Beirut to Jerusalem</em></a></td><td class="td-author">Thomas Friedman</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Malaysia</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Garden+of+Evening+Mists+Tan+Twan+Eng" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8334888-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Garden of Evening Mists</em></a></td><td class="td-author">Tan Twan Eng</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Myanmar</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=First+They+Erased+Our+Name+Habiburahman" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10683912-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>First, They Erased Our Name</em></a></td><td class="td-author">Habiburahman</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>North Korea</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Nothing+to+Envy+Barbara+Demick" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/7948097-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Nothing to Envy</em></a></td><td class="td-author">Barbara Demick</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Pakistan</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Exit+West+Mohsin+Hamid" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/7909066-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Exit West / Moth Smoke + many</em></a></td><td class="td-author">Hamid, Hanif, Bhutto, Peer</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>South Korea</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Pachinko+Min+Jin+Lee" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8044605-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>No One Writes Back / Pachinko</em></a></td><td class="td-author">Jang Eun-Jin, Min Jin Lee</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Sri Lanka</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=This+Divided+Island+Samanth+Subramanian" target="_blank" rel="noopener" class="book-link"><em>This Divided Island</em></a></td><td class="td-author">Samanth Subramanian</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Vietnam</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Sympathizer+Viet+Thanh+Nguyen" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/7913176-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Sympathizer</em></a></td><td class="td-author">Viet Thanh Nguyen</td><td><span class="badge read">Read</span></td></tr>
+
+  <tr><td><div class="td-country"><span class="pip queued"></span>China</div></td><td class="td-book">The Three-Body Problem</td><td class="td-author">Liu Cixin</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Indonesia</div></td><td class="td-book">Beauty Is a Wound</td><td class="td-author">Eka Kurniawan</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Kazakhstan</div></td><td class="td-book">Winter Pasture</td><td class="td-author">Li Juan</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Palestine</div></td><td class="td-book">Minor Detail</td><td class="td-author">Adania Shibli</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Syria</div></td><td class="td-book">The Arab of the Future</td><td class="td-author">Riad Sattouf</td><td><span class="badge queued">On list</span></td></tr>
+
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Bangladesh</div></td><td class="td-book"><span class="try-tag">try</span>A Golden Age</td><td class="td-author">Tahmima Anam</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Cambodia</div></td><td class="td-book"><span class="try-tag">try</span>First They Killed My Father</td><td class="td-author">Loung Ung</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Iraq</div></td><td class="td-book"><span class="try-tag">try</span>The Corpse Washer</td><td class="td-author">Sinan Antoon</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Jordan</div></td><td class="td-book"><span class="try-tag">try</span>The Hakawati</td><td class="td-author">Rabih Alameddine</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Kyrgyzstan</div></td><td class="td-book"><span class="try-tag">try</span>Jamilia</td><td class="td-author">Chinghiz Aitmatov</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Mongolia</div></td><td class="td-book"><span class="try-tag">try</span>The Blue Sky</td><td class="td-author">Galsan Tschinag</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Nepal</div></td><td class="td-book"><span class="try-tag">try</span>Arresting God in Kathmandu</td><td class="td-author">Samrat Upadhyay</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Philippines</div></td><td class="td-book"><span class="try-tag">try</span>Noli Me Tangere</td><td class="td-author">José Rizal</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Saudi Arabia</div></td><td class="td-book"><span class="try-tag">try</span>Girls of Riyadh</td><td class="td-author">Rajaa Alsanea</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Singapore</div></td><td class="td-book"><span class="try-tag">try</span>Ponti</td><td class="td-author">Sharlene Teo</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Taiwan</div></td><td class="td-book"><span class="try-tag">try</span>Notes of a Crocodile</td><td class="td-author">Qiu Miaojin</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Thailand</div></td><td class="td-book"><span class="try-tag">try</span>The Judgment</td><td class="td-author">Chart Korbjitti</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>UAE</div></td><td class="td-book"><span class="try-tag">try</span>Temporary People</td><td class="td-author">Deepak Unnikrishnan</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-combined row-gap"><td colspan="4"><div class="td-country" style="margin-bottom:0.2em"><span class="pip gap"></span><span style="font-size:0.68rem;color:rgba(17,17,17,0.3);text-transform:uppercase;letter-spacing:0.1em">Suggestions welcome</span></div><div class="combined-countries">Bahrain · Bhutan · Brunei · Kuwait · Laos · Maldives · Oman · Qatar · Tajikistan · Timor-Leste · Turkmenistan · Uzbekistan · Yemen</div></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ EUROPE ═══ -->
+<div class="continent">
+<h2>Europe</h2>
+<table>
+<thead><tr>
+  <th>Country</th><th>Book</th><th>Author</th><th>Status</th>
+</tr></thead>
+<tbody>
+  <tr><td><div class="td-country"><span class="pip read"></span>Austria</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Man%27s+Search+for+Meaning+Viktor+Frankl" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/8516506-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Man's Search for Meaning</em></a></td><td class="td-author">Viktor Frankl</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Bulgaria</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=East+of+the+West+Miroslav+Penkov" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/9076125-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>East of the West</em></a></td><td class="td-author">Miroslav Penkov</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Czech Republic</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Growth+Vaclav+Smil" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10104552-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Growth</em></a></td><td class="td-author">Vaclav Smil</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Germany</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Art+of+Loving+Erich+Fromm" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/4741809-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Visitation / The Art of Loving</em></a></td><td class="td-author">Erpenbeck, Fromm</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Greece</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Meditations+Marcus+Aurelius" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/211529-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Meditations</em></a></td><td class="td-author">Marcus Aurelius</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Italy</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Seven+Brief+Lessons+on+Physics+Carlo+Rovelli" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/7398110-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Seven Brief Lessons on Physics</em></a></td><td class="td-author">Carlo Rovelli</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Norway</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Spring+Karl+Ove+Knausgard" target="_blank" rel="noopener" class="book-link"><em>Spring (Seasons Quartet)</em></a></td><td class="td-author">Karl Ove Knausgård</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Poland</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Flights+Olga+Tokarczuk" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/11426109-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Flights</em></a></td><td class="td-author">Olga Tokarczuk</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Portugal</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Book+of+Disquiet+Fernando+Pessoa" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/900685-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Book of Disquiet</em></a></td><td class="td-author">Fernando Pessoa</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Russia</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Crime+and+Punishment+Dostoevsky" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/14911181-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Crime and Punishment</em></a></td><td class="td-author">Fyodor Dostoevsky</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Spain</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Shadow+of+the+Wind+Carlos+Ruiz+Zafon" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/10107644-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>The Shadow of the Wind</em></a></td><td class="td-author">Carlos Ruiz Zafón</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>Turkey</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Snow+Orhan+Pamuk" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/6881426-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Snow</em></a></td><td class="td-author">Orhan Pamuk</td><td><span class="badge read">Read</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip read"></span>United Kingdom</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=The+Lord+of+the+Rings+Tolkien" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/14625765-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Lord of the Rings / Harry Potter + many</em></a></td><td class="td-author">Tolkien, Rowling, Haig…</td><td><span class="badge read">Read</span></td></tr>
+
+  <tr><td><div class="td-country"><span class="pip queued"></span>Albania</div></td><td class="td-book">The Doll</td><td class="td-author">Ismail Kadare</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Bosnia &amp; Herzegovina</div></td><td class="td-book">The Bridge on the Drina</td><td class="td-author">Ivo Andrić</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Denmark</div></td><td class="td-book">The Chestnut Man</td><td class="td-author">Søren Sveistrup</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>France</div></td><td class="td-book">Swann's Way</td><td class="td-author">Marcel Proust</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Georgia</div></td><td class="td-book">The Pear Field</td><td class="td-author">Nana Ekvtimishvili</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Iceland</div></td><td class="td-book">Summer Light, and Then Comes the Night</td><td class="td-author">Jón Kalman Stefánsson</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Ireland</div></td><td class="td-book">A Ghost in the Throat</td><td class="td-author">Doireann Ní Ghríofa</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Netherlands</div></td><td class="td-book">Summer Brother</td><td class="td-author">Jaap Robben</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Slovenia</div></td><td class="td-book">Alamut</td><td class="td-author">Vladimir Bartol</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Sweden</div></td><td class="td-book">Beartown</td><td class="td-author">Fredrik Backman</td><td><span class="badge queued">On list</span></td></tr>
+  <tr><td><div class="td-country"><span class="pip queued"></span>Ukraine</div></td><td class="td-book">Voices from Chernobyl</td><td class="td-author">Svetlana Alexievich</td><td><span class="badge queued">On list</span></td></tr>
+
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Armenia</div></td><td class="td-book"><span class="try-tag">try</span>The Forty Days of Musa Dagh</td><td class="td-author">Franz Werfel</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Azerbaijan</div></td><td class="td-book"><span class="try-tag">try</span>Ali and Nino</td><td class="td-author">Kurban Said</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Belarus</div></td><td class="td-book"><span class="try-tag">try</span>The Last Witnesses</td><td class="td-author">Svetlana Alexievich</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Belgium</div></td><td class="td-book"><span class="try-tag">try</span>The Sorrow of Belgium</td><td class="td-author">Hugo Claus</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Croatia</div></td><td class="td-book"><span class="try-tag">try</span>The Ministry of Pain</td><td class="td-author">Dubravka Ugrešić</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Estonia</div></td><td class="td-book"><span class="try-tag">try</span>Truth and Justice</td><td class="td-author">A.H. Tammsaare</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Finland</div></td><td class="td-book"><span class="try-tag">try</span>The Year of the Hare</td><td class="td-author">Arto Paasilinna</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Hungary</div></td><td class="td-book"><span class="try-tag">try</span>Fatelessness</td><td class="td-author">Imre Kertész</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Romania</div></td><td class="td-book"><span class="try-tag">try</span>Nostalgia</td><td class="td-author">Mircea Cărtărescu</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Serbia</div></td><td class="td-book"><span class="try-tag">try</span>A Tomb for Boris Davidovich</td><td class="td-author">Danilo Kiš</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Switzerland</div></td><td class="td-book"><span class="try-tag">try</span>Man in the Holocene</td><td class="td-author">Max Frisch</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-combined row-gap"><td colspan="4"><div class="td-country" style="margin-bottom:0.2em"><span class="pip gap"></span><span style="font-size:0.68rem;color:rgba(17,17,17,0.3);text-transform:uppercase;letter-spacing:0.1em">Suggestions welcome</span></div><div class="combined-countries">Andorra · Cyprus · Latvia · Liechtenstein · Lithuania · Luxembourg · Malta · Moldova · Monaco · Montenegro · North Macedonia · San Marino · Slovakia · Vatican City</div></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ OCEANIA ═══ -->
+<div class="continent">
+<h2>Oceania</h2>
+<table>
+<thead><tr>
+  <th>Country</th><th>Book</th><th>Author</th><th>Status</th>
+</tr></thead>
+<tbody>
+  <tr><td><div class="td-country"><span class="pip read"></span>Australia</div></td><td class="td-book"><a href="https://www.goodreads.com/search?q=Migrations+Charlotte+McConaghy" target="_blank" rel="noopener" class="book-link"><img src="https://covers.openlibrary.org/b/id/9332728-L.jpg" class="book-cover" alt="" onerror="this.style.display='none'"><em>Migrations</em></a></td><td class="td-author">Charlotte McConaghy</td><td><span class="badge read">Read</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>New Zealand</div></td><td class="td-book"><span class="try-tag">try</span>The Bone People</td><td class="td-author">Keri Hulme</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-gap"><td><div class="td-country"><span class="pip gap"></span>Papua New Guinea</div></td><td class="td-book"><span class="try-tag">try</span>The Crocodile</td><td class="td-author">Vincent Eri</td><td><span class="badge gap">—</span></td></tr>
+  <tr class="row-combined row-gap"><td colspan="4"><div class="td-country" style="margin-bottom:0.2em"><span class="pip gap"></span><span style="font-size:0.68rem;color:rgba(17,17,17,0.3);text-transform:uppercase;letter-spacing:0.1em">Suggestions welcome</span></div><div class="combined-countries">Fiji · Kiribati · Marshall Islands · Micronesia · Nauru · Palau · Samoa · Solomon Islands · Tonga · Tuvalu · Vanuatu</div></td></tr>
+</tbody>
+</table>
+</div>
+
+</div><!-- /main -->
+
+<div class="page-footer">
+  Updated February 2026 &nbsp;·&nbsp; <a href="/">surendrachaplot.com</a>
+</div>
+
+</body>
+</html>
