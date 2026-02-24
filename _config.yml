@@ -1,0 +1,39 @@
+title: Surendra
+description: "Jack of a few things. Trying to master some of them."
+url: "https://surendrachaplot.com"
+baseurl: ""
+author: Surendra Chaplot
+email: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - README.md
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
