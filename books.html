@@ -265,11 +265,74 @@ permalink: /books/
     border-radius: 2px;
     flex-shrink: 0;
   }
+
+  /* ── SITE NAV ── */
+  .site-header {
+    max-width: 100%;
+    padding: 2rem 2.5em 1.5rem;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0;
+  }
+  .site-name {
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .site-name:hover { color: rgba(17,17,17,0.5); }
+  .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .site-nav a {
+    font-family: 'Gill Sans MT', 'Gill Sans', Verdana, sans-serif;
+    font-size: 0.75rem;
+    color: rgba(17,17,17,0.5);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+  .site-nav a:hover { color: #111; }
+  .site-nav a.active { color: #d0381f; }
+
+  /* ── SITE FOOTER ── */
+  .site-footer {
+    max-width: 100%;
+    margin: 0 2.5em;
+    padding: 1.5rem 0 2rem;
+    border-top: 1px solid rgba(17,17,17,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(17,17,17,0.35);
+  }
+  .site-footer-links { display: flex; gap: 1.25rem; }
+  .site-footer a { color: rgba(17,17,17,0.35); text-decoration: none; }
+  .site-footer a:hover { color: #d0381f; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<header class="site-header">
+  <a href="/" class="site-name">Surendra</a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/books" class="active">Books</a>
+    <a href="/posts">Posts</a>
+    <a href="/search">Search</a>
+    <a href="/photos">Photos</a>
+  </nav>
+</header>
+
+<!-- BOOKS HEADER -->
 <div class="page-header">
   <div class="header-left">
 <h1>A book from every country</h1>
@@ -494,8 +557,15 @@ permalink: /books/
 </div><!-- /main -->
 
 <div class="page-footer">
-  Updated February 2026 &nbsp;·&nbsp; <a href="/">surendrachaplot.com</a>
+  Updated February 2026
 </div>
+<footer class="site-footer">
+  <span>Surendra Chaplot</span>
+  <span class="site-footer-links">
+    <a href="https://instagram.com/chaplot" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://goodreads.com/chaplot" target="_blank" rel="noopener">Goodreads</a>
+  </span>
+</footer>
 
 </body>
 </html>
