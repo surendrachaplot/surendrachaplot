@@ -6,7 +6,7 @@
 
   /* ── PAGE HEADER ── */
   .page-header {
-    padding: 0.5em 2.5em 1.5em;
+    padding: 0.5em 0 1.5em;
     border-bottom: 1px solid rgba(17,17,17,0.12);
     display: flex;
     align-items: flex-end;
@@ -61,7 +61,7 @@
 
   /* ── LEGEND ── */
   .legend-bar {
-    padding: 0.9em 2.5em;
+    padding: 0.9em 0;
     border-bottom: 1px solid rgba(17,17,17,0.12);
     display: flex;
     gap: 2em;
@@ -88,7 +88,7 @@
   .pip.gap    { background: transparent; border: 1px solid rgba(17,17,17,0.22); }
 
   /* ── MAIN ── */
-  .main { padding: 0 2.5em 6em; }
+  .main { padding: 0 0 6em; }
 
   /* ── CONTINENT SECTION ── */
   .continent { margin-top: 3.5em; }
@@ -193,9 +193,9 @@
     thead th:nth-child(2) { width: 62%; }
     /* Smaller covers on mobile */
     .book-cover { height: 64px; }
-    .page-header { padding: 2.5em 1.2em 2em; }
-    .legend-bar { padding: 0.9em 1.2em; }
-    .main { padding: 0 1.2em 4em; }
+    .page-header { padding: 2.5em 0 2em; }
+    .legend-bar { padding: 0.9em 0; }
+    .main { padding: 0 0 4em; }
   }
 
   .book-link {
