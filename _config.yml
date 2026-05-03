@@ -1,38 +1,53 @@
-title: Surendra
-description: "Jack of a few things. Trying to master some of them."
+title: "Surendra Chaplot"
+tagline: "A jack of a few things, made slowly."
+description: "Writing, photographs from the road, and notes from a working life."
+author: "Surendra Chaplot"
+email: ""
 url: "https://surendrachaplot.github.io"
 baseurl: ""
-author: Surendra Chaplot
-email: ""
 
-# Build settings
+# Navigation
+nav_links:
+  - { title: "Writing",      url: "/posts/" }
+  - { title: "Photographs",  url: "/photos/" }
+  - { title: "Books",        url: "/books/" }
+  - { title: "About",        url: "/about/" }
+
+# Social
+social:
+  - { label: "Instagram", url: "https://instagram.com/chaplot" }
+  - { label: "Goodreads", url: "https://www.goodreads.com/chaplot" }
+  - { label: "RSS",       url: "/feed.xml" }
+
+# Footer
+currently: "Singapore"
+established: 2009
+
+# Build
 markdown: kramdown
 highlighter: rouge
-permalink: /:title/
+permalink: /writing/:slug/
 
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values:
+      layout: post
+  - scope: { path: "", type: "pages" }
+    values:
+      layout: page
 
 exclude:
   - Gemfile
   - Gemfile.lock
-  - node_modules
   - vendor
+  - node_modules
   - .bundle
   - README.md
 
 kramdown:
   input: GFM
   hard_wrap: false
-
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "page"

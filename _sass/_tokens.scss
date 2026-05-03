@@ -1,0 +1,60 @@
+/* Brand tokens — translated from the design system */
+
+/* Color · 4-swatch system */
+$paper-50:  #ffffff;
+$paper-100: #fafbf9;
+$paper-200: #ebeee8;
+$paper-300: #d4dacd;
+
+$ink-900: #0f1410;
+$ink-700: #283027;
+$ink-500: #5d685d;
+$ink-300: #9aa399;
+
+$forest-500: #3f7a4f;
+$forest-600: #2d5d3a;
+$moss-200:   #c8d8c2;
+$moss-100:   #e6ede0;
+
+/* Semantic */
+$bg:        $paper-50;
+$bg-elev:   $paper-100;
+$bg-sunken: #f5f7f3;
+$rule:      $paper-200;
+$rule-bold: $paper-300;
+
+$fg:       $ink-900;
+$fg-soft:  $ink-700;
+$fg-muted: $ink-500;
+$fg-faint: $ink-300;
+
+$accent:    $forest-500;
+$accent-bg: $moss-200;
+$accent-wash: $moss-100;
+
+/* Type */
+$font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+$font-sans:    'Plus Jakarta Sans', system-ui, sans-serif;
+$font-serif:   'Source Serif 4', Georgia, serif;
+$font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+/* Spacing · 4pt */
+$s-1: 4px;  $s-2: 8px;   $s-3: 12px;  $s-4: 16px;  $s-5: 20px;
+$s-6: 24px; $s-8: 32px;  $s-10: 40px; $s-12: 48px; $s-16: 64px;
+$s-20: 80px; $s-24: 96px; $s-32: 128px;
+
+/* Layout */
+$col-max:  1200px;
+$col-text: 680px;
+$col-wide: 920px;
+$gutter:   24px;
+$margin:   32px;
+
+/* Motion */
+$ease-out: cubic-bezier(.2, .7, .2, 1);
+$d-fast: 140ms;
+$d-base: 220ms;
+
+/* Breakpoints */
+$bp-md: 720px;
+$bp-lg: 1024px;

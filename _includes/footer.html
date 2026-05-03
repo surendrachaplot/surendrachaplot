@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div class="site-footer__col">
+        <h5>{{ site.title }}</h5>
+        <p style="font-family: var(--font-serif, serif); font-style: italic; color: #5d685d; max-width: 36ch; margin: 0;">
+          {{ site.description }}
+        </p>
+      </div>
+      <div class="site-footer__col">
+        <h5>Read</h5>
+        <ul>
+          {%- for item in site.nav_links -%}
+            <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h5>Elsewhere</h5>
+        <ul>
+          {%- for s in site.social -%}
+            <li><a href="{{ s.url }}">{{ s.label }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© {{ site.established }}–{{ 'now' | date: "%Y" }} · {{ site.title }}</span>
+      <span>Made slowly</span>
+    </div>
+  </div>
+</footer>

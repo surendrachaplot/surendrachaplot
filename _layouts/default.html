@@ -1,44 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title and page.title != site.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  {% if page.custom_css %}<link rel="stylesheet" href="{{ page.custom_css }}">{% endif %}
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
+  {%- include head.html -%}
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a href="/" class="site-name">Surendra</a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/books">Books</a>
-        <a href="/posts">Posts</a>
-        <a href="/search">Search</a>
-        <a href="/photos">Photos</a>
-      </nav>
-    </div>
-  </header>
-
+  {%- include header.html -%}
   <main>
     {{ content }}
   </main>
-
-  <footer>
-    <div class="footer-inner">
-      <span>Surendra Chaplot</span>
-      <span class="footer-links">
-        <a href="https://instagram.com/chaplot" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://goodreads.com/chaplot" target="_blank" rel="noopener">Goodreads</a>
-        <a href="/feed.xml">RSS</a>
-      </span>
-    </div>
-  </footer>
+  {%- include footer.html -%}
 </body>
 </html>

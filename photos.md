@@ -1,7 +1,9 @@
 ---
 layout: page
-title: Photos
+title: "Photographs"
+kicker: "Photographs"
+lede: "Street photography and travel."
 permalink: /photos/
 ---
 
-Street photography and travel. Follow along on [Instagram](https://www.instagram.com/chaplot).
+Follow along on [Instagram](https://www.instagram.com/chaplot).

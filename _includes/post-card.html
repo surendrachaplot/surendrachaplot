@@ -1,0 +1,14 @@
+<article class="post-card">
+  <div class="post-card__meta">
+    <span class="post-card__kicker">{{ include.post.kicker | default: "Essay" }}</span>
+    <span>{{ include.post.date | date: "%B %Y" }}</span>
+  </div>
+  <h3 class="post-card__title">
+    <a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a>
+  </h3>
+  <p class="post-card__excerpt">{{ include.post.excerpt | strip_html | truncatewords: 28 }}</p>
+  <div class="post-card__footer">
+    {% if include.post.read_time %}<span>{{ include.post.read_time }} read</span><span>·</span>{% endif %}
+    {% if include.post.location %}<span>{{ include.post.location }}</span>{% endif %}
+  </div>
+</article>

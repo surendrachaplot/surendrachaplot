@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Surendra Chaplot</span>
+      <h1 class="hero__title">A jack of a few <em>things</em>, made slowly.</h1>
+      <p class="hero__lede">
+        Working on money without borders at <span class="pop">Wise</span>. Reading a book from every country. Taking photographs on the road.
+      </p>
+      <div class="hero__actions">
+        <a class="btn" href="/posts/">Read the writing →</a>
+        <a class="btn btn--secondary" href="/about/">About</a>
+      </div>
+    </div>
+    <aside class="hero__photo">
+      <span>Singapore · {{ site.currently }}</span>
+    </aside>
+  </section>
+
+  <div class="section-header">
+    <h2>Latest writing</h2>
+    <a href="/posts/">All writing →</a>
+  </div>
+
+  <div class="posts-list">
+    {%- for post in site.posts limit:5 -%}
+      {% include post-card.html post=post %}
+    {%- endfor -%}
+  </div>
+
+  <section class="subscribe">
+    <div>
+      <h3>A <em>quiet</em> letter, every other week.</h3>
+      <p>Field notes from the road, slow studio updates, and the occasional photograph. No noise.</p>
+    </div>
+    <form action="#" method="post">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@somewhere.com" required>
+      </div>
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+  </section>
+</div>
