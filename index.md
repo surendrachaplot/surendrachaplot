@@ -1,8 +1,8 @@
 ---
 layout: page
-title: "Surendra Chaplot"
-lede: "Jack of a few things. Trying to master some of them."
-hide_title: true
+title: "Jack of a few things."
+lede: "Trying to master some of them."
+hide_title: false
 permalink: /
 ---
 
