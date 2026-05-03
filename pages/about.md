@@ -1,8 +1,8 @@
 ---
 layout: page
-title: "About"
+title: "Jack of a few things."
 kicker: "About"
-lede: "Jack of a few things. Trying to master some of them."
+lede: "Trying to master some of them."
 permalink: /about/
 ---
 
