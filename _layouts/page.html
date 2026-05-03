@@ -6,9 +6,9 @@ layout: default
   <span class="eyebrow">{{ page.kicker | default: "Page" }}</span>
   <h1 style="margin-top: 16px;">{{ page.title }}</h1>
   {% endunless %}
-  {% if page.lede %}<p class="prose" style="margin-top: 0; font-size: 18px;">{{ page.lede }}</p>{% endif %}
+  {% if page.lede %}<h4 style="margin-top: 16px; margin-bottom: 0;">{{ page.lede }}</h4>{% endif %}
 
-  <div class="prose" style="margin-top: 48px;">
+  <div class="prose" style="margin-top: 32px;">
     {{ content }}
   </div>
 </div>
