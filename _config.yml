@@ -20,7 +20,7 @@ social:
   - { label: "RSS",       url: "/feed.xml" }
 
 # Footer
-currently: "Singapore"
+currently: "London"
 established: 2009
 
 # Build
