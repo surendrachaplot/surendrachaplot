@@ -11,17 +11,6 @@
 
   p { margin: 0 0 $s-5; }
 
-  > p:first-of-type::first-letter {
-    font-family: $font-display;
-    font-weight: 300;
-    font-size: 4.6em;
-    line-height: 0.85;
-    float: left;
-    margin: 0.06em $s-3 -0.05em 0;
-    color: $accent;
-    letter-spacing: -0.03em;
-  }
-
   h2 {
     font-family: $font-display;
     font-weight: 500;
