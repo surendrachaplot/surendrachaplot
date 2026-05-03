@@ -54,8 +54,10 @@
     text-decoration: none;
     color: $ink-900;
     position: relative;
+    padding: $s-2 0;
     &.is-active { color: $accent; }
     &:hover { color: $accent; }
+    @media (max-width: $bp-md) { padding: $s-3 $s-2; }
   }
 }
 
