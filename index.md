@@ -12,7 +12,7 @@ Co-founded a magazine called [21Fools](https://21fools.com/) which then became a
 
 Spent the last decade or so learning the world of Internet.
 
-Lived in Mumbai, Delhi, Jakarta and now in Singapore. Still consider the beautiful City of Lakes — [Udaipur](https://en.wikipedia.org/wiki/Udaipur) my home 'home'.
+Lived in Mumbai, Delhi, Jakarta, Singapore and now in London. Still consider the beautiful City of Lakes — [Udaipur](https://en.wikipedia.org/wiki/Udaipur) my home 'home'.
 
 Currently working on Money without borders at [Wise](https://wise.com/). It is a fantastic place to work at. We are always hiring and you can write to me if any role on this [link](https://wise.jobs/) excites you.
 
