@@ -16,11 +16,11 @@ Lived in Mumbai, Delhi, Jakarta, Singapore and now in London. Still consider the
 
 Currently working on Money without borders at [Wise](https://wise.com/). It is a fantastic place to work at. We are always hiring and you can write to me if any role on this [link](https://wise.jobs/) excites you.
 
-## Photography
+### Photography
 
 I started taking pictures beyond the occasional one with my phone in 2015. Sometimes I post them on [Instagram](https://www.instagram.com/chaplot). Come say hi.
 
-## Books
+### Books
 
 I maintain [my Goodreads shelf](https://www.goodreads.com/chaplot) actively. Also trying to read a book from every country — [195 countries, one book each](/books/).
 
