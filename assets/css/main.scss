@@ -1,7 +1,7 @@
 ---
 ---
-@use 'tokens' as *;
-@use 'base';
-@use 'layout';
-@use 'components';
-@use 'content';
+@import 'tokens';
+@import 'base';
+@import 'layout';
+@import 'components';
+@import 'content';
