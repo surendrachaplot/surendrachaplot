@@ -1,7 +1,8 @@
 ---
 layout: default
 ---
-<div class="wrap wrap--text" style="padding-top: 96px;">
+<div class="wrap wrap--text" style="padding-top: {% if page.hide_title %}40px{% else %}72px{% endif %};">
+
   {% unless page.hide_title %}
   <span class="eyebrow">{{ page.kicker | default: "Page" }}</span>
   <h1 style="margin-top: 16px;">{{ page.title }}</h1>
