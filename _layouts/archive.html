@@ -2,8 +2,7 @@
 layout: default
 ---
 <div class="wrap" style="padding-top: 96px;">
-  <span class="eyebrow">{{ page.kicker | default: "Archive" }}</span>
-  <h1 style="margin-top: 16px;">{{ page.title }}</h1>
+  <h1 style="margin-top: 0;">{{ page.title }}</h1>
   {% if page.lede %}<p style="font-family: var(--font-serif, serif); font-style: italic; font-size: 20px; line-height: 1.5; color: #283027; max-width: 56ch;">{{ page.lede }}</p>{% endif %}
 
   <div class="posts-list" style="margin-top: 48px;">
