@@ -31,10 +31,10 @@
 
 .wordmark {
   font-family: $font-display;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.03em;
   text-decoration: none;
   color: $ink-900;
   &:hover { color: $ink-900; text-decoration: none; }
