@@ -4,7 +4,7 @@ description: "Writing, photographs from the road, and notes from a working life.
 author: "Surendra Chaplot"
 email: ""
 url: "https://surendrachaplot.github.io"
-baseurl: ""
+baseurl: "/surendrachaplot"
 
 # Navigation
 nav_links:
