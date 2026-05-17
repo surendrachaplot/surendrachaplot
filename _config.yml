@@ -9,6 +9,7 @@ baseurl: ""
 # Navigation
 nav_links:
   - { title: "Writing",      url: "/posts/" }
+  - { title: "Recipes",      url: "/recipes/" }
   - { title: "Photographs",  url: "/photos/" }
   - { title: "Books",        url: "/books/" }
 
