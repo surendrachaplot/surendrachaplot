@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipe List</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, serif; max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; color: #222; line-height: 1.75; background: #fff; }
+    nav { margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    nav .brand { font-size: 1.1rem; font-weight: bold; text-decoration: none; color: #222; }
+    nav .home { font-size: .85rem; color: #888; text-decoration: none; }
+    nav .home:hover { color: #222; }
+    h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+    .subtitle { color: #666; font-size: .95rem; margin-bottom: 2rem; }
+    ul.recipe-list { list-style: none; }
+    ul.recipe-list li { padding: .9rem 0; border-bottom: 1px solid #eee; }
+    ul.recipe-list li:last-child { border-bottom: none; }
+    ul.recipe-list a { text-decoration: none; color: #222; font-size: 1.05rem; }
+    ul.recipe-list a:hover { text-decoration: underline; color: #c30; }
+    .meta { display: block; font-size: .85rem; color: #888; margin-top: .15rem; }
+    .note { font-size: .92rem; color: #555; margin-top: .25rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="./">Recipe List</a>
+    <a class="home" href="/">Home</a>
+  </nav>
+  <h1>Fish-forward, heart-healthy dinners</h1>
+  <p class="subtitle">Fast meals built around oily fish, beans, greens, whole grains, olive oil, and enough flavour that it still feels like dinner rather than a lecture.</p>
+  <ul class="recipe-list">
+    <li><a href="sardine-white-bean-fennel-salad.html">Sardine, White Bean &amp; Fennel Lemon Salad</a><span class="meta">15 min · Serves 2</span><p class="note">Cheap, sharp, and actually useful. Sardines for omega-3s, beans for fibre.</p></li>
+    <li><a href="mackerel-rice-bowl.html">Mackerel Rice Bowl with Cucumber, Herbs, and Soy-Lime Dressing</a><span class="meta">20 min · Serves 2</span><p class="note">Oily fish doing the heavy lifting, with rice, crunch, and acid.</p></li>
+    <li><a href="salmon-soba-bowl.html">Salmon Soba Bowl with Edamame and Sesame Greens</a><span class="meta">25 min · Serves 2</span><p class="note">The dependable salmon bowl. Clean, filling, hard to mess up.</p></li>
+    <li><a href="cod-traybake-tomatoes-olives-chickpeas.html">Cod Traybake with Tomatoes, Olives, and Chickpeas</a><span class="meta">30 min · Serves 2</span><p class="note">Mediterranean, low effort, and substantial enough to count as a real meal.</p></li>
+    <li><a href="tuna-cannellini-caper-pasta.html">Tuna, Cannellini Bean &amp; Caper Pasta</a><span class="meta">20 min · Serves 2</span><p class="note">Cupboard dinner, but one with self-respect.</p></li>
+    <li><a href="trout-warm-lentils-dill-mustard.html">Trout with Warm Lentils, Dill, and Mustard Vinaigrette</a><span class="meta">25 min · Serves 2</span><p class="note">Trout is underrated. Lentils keep it grounded.</p></li>
+    <li><a href="goan-fish-curry-brown-rice.html">Goan-Style Fish Curry with Brown Rice</a><span class="meta">30 min · Serves 2</span><p class="note">Comforting curry, lighter hand, less collateral damage.</p></li>
+    <li><a href="salmon-fishcakes-cabbage-slaw.html">Salmon Fishcakes with Yogurt, Herbs, and Cabbage Slaw</a><span class="meta">30 min · Serves 2</span><p class="note">Crisp edges, sharp slaw, no breadcrumb swamp.</p></li>
+  </ul>
+</body>
+</html>
