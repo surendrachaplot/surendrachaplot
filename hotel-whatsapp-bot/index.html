@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concierge AI — AI-Powered WhatsApp Bot for Boutique Hotels</title>
+  <meta name="description" content="Delight your guests with an AI concierge that speaks 30+ languages, answers instantly, and knows everything about your hotel. Built for boutique hospitality." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>" />
+  <style>
+    /* ── Reset & Base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0f172a; color: #e2e8f0;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ── Utility ──────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-label {
+      text-transform: uppercase; font-size: 13px; font-weight: 700;
+      letter-spacing: 2px; color: #10b981; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+      line-height: 1.2; color: #f8fafc; margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 18px; color: #94a3b8; max-width: 600px; line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    /* ── Animations ───────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes typing {
+      0% { opacity: 0.3; } 30% { opacity: 1; } 60%, 100% { opacity: 0.3; }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+    .animate { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .animate.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ── Buttons ──────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px; font-weight: 600;
+      font-size: 15px; border: none; transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: #10b981; color: #0f172a;
+    }
+    .btn-primary:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.3); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08); color: #f8fafc; border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+    .btn-sm { padding: 10px 20px; font-size: 14px; border-radius: 8px; }
+
+    /* ── Navbar ───────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: rgba(15,23,42,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: padding 0.3s;
+    }
+    .navbar.scrolled { padding: 10px 0; }
+    .navbar .container { display: flex; align-items: center; justify-content: space-between; }
+    .navbar-logo {
+      font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 10px;
+    }
+    .navbar-logo span { color: #10b981; }
+    .navbar-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .navbar-links a {
+      font-size: 14px; font-weight: 500; color: #94a3b8;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover { color: #f8fafc; }
+    .navbar-cta { display: flex; align-items: center; gap: 12px; }
+    .mobile-toggle {
+      display: none; background: none; border: none; color: #e2e8f0; font-size: 24px;
+      padding: 4px;
+    }
+
+    /* ── Hero ─────────────────────────────────── */
+    .hero {
+      padding: 160px 0 100px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -50%; left: -20%; width: 70%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(16,185,129,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hero-content { z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 600;
+      color: #10b981; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px); font-weight: 800;
+      line-height: 1.1; color: #f8fafc; margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px; color: #94a3b8; line-height: 1.7;
+      margin-bottom: 32px; max-width: 480px;
+    }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 48px;
+    }
+    .hero-stat-value {
+      font-size: 28px; font-weight: 800; color: #f8fafc;
+    }
+    .hero-stat-label {
+      font-size: 13px; color: #64748b; margin-top: 2px;
+    }
+
+    /* ── Chat Mockup ─────────────────────────── */
+    .chat-mockup {
+      background: #1e293b; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4); animation: float 6s ease-in-out infinite;
+      max-width: 380px; margin-left: auto; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .chat-header {
+      background: #0f172a; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .chat-avatar {
+      width: 36px; height: 36px; background: #10b981; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .chat-name { font-size: 14px; font-weight: 600; }
+    .chat-status { font-size: 11px; color: #10b981; }
+    .chat-body { padding: 16px; min-height: 320px; display: flex; flex-direction: column; gap: 8px; }
+    .chat-msg {
+      padding: 8px 12px; border-radius: 12px; font-size: 13px;
+      max-width: 80%; line-height: 1.5; opacity: 0;
+    }
+    .chat-msg.sent {
+      align-self: flex-end; background: #005c4b; color: #e2e8f0;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg.received {
+      align-self: flex-start; background: #334155; color: #e2e8f0;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.visible { animation: slideIn 0.4s ease forwards; }
+    .chat-msg .lang-tag {
+      font-size: 10px; color: #10b981; margin-bottom: 2px;
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+    }
+    .chat-msg .time { font-size: 10px; color: #64748b; text-align: right; margin-top: 2px; }
+    .chat-typing {
+      align-self: flex-start; background: #334155; padding: 10px 16px;
+      border-radius: 12px; display: none;
+    }
+    .chat-typing span {
+      display: inline-block; width: 6px; height: 6px; background: #64748b;
+      border-radius: 50%; margin: 0 2px;
+    }
+    .chat-typing span:nth-child(1) { animation: typing 1.4s infinite 0s; }
+    .chat-typing span:nth-child(2) { animation: typing 1.4s infinite 0.2s; }
+    .chat-typing span:nth-child(3) { animation: typing 1.4s infinite 0.4s; }
+    .chat-input {
+      padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .chat-input-field {
+      flex: 1; background: #0f172a; border: none; border-radius: 20px;
+      padding: 8px 14px; color: #94a3b8; font-size: 13px;
+    }
+    .chat-input-send {
+      width: 32px; height: 32px; background: #10b981; border: none;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Trust Bar ────────────────────────────── */
+    .trust-bar {
+      padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .trust-bar p {
+      text-align: center; font-size: 13px; color: #475569;
+      text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
+      margin-bottom: 32px;
+    }
+    .trust-logos {
+      display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap;
+    }
+    .trust-logo {
+      font-size: 18px; font-weight: 700; color: #334155;
+      letter-spacing: 1px; opacity: 0.7;
+    }
+
+    /* ── Features ─────────────────────────────── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 60px;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 32px; transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      background: rgba(255,255,255,0.06); border-color: rgba(16,185,129,0.3);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; background: rgba(16,185,129,0.12);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 20px;
+    }
+    .feature-card h3 {
+      font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+
+    /* ── How It Works ─────────────────────────── */
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+      margin-top: 60px; position: relative;
+    }
+    .steps::before {
+      content: ''; position: absolute; top: 44px; left: 15%; right: 15%;
+      height: 2px; background: linear-gradient(90deg, transparent, #10b981, transparent);
+    }
+    .step { text-align: center; position: relative; }
+    .step-number {
+      width: 88px; height: 88px; margin: 0 auto 24px;
+      background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 800; color: #10b981;
+      position: relative; z-index: 1;
+    }
+    .step h3 { font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: #94a3b8; max-width: 280px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── Demo ─────────────────────────────────── */
+    .demo-section { background: rgba(16,185,129,0.03); }
+    .demo-wrapper {
+      margin-top: 48px; max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ── Pricing ──────────────────────────────── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 60px;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 36px; position: relative;
+      transition: all 0.3s ease;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.popular {
+      border-color: rgba(16,185,129,0.5); background: rgba(16,185,129,0.05);
+    }
+    .pricing-popular-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: #10b981; color: #0f172a; font-size: 12px; font-weight: 700;
+      padding: 4px 16px; border-radius: 100px; text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pricing-tier {
+      font-size: 13px; font-weight: 700; color: #10b981;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .pricing-price {
+      font-size: 48px; font-weight: 800; color: #f8fafc;
+    }
+    .pricing-price span { font-size: 16px; color: #64748b; font-weight: 500; }
+    .pricing-desc {
+      font-size: 14px; color: #94a3b8; margin: 8px 0 24px; line-height: 1.6;
+    }
+    .pricing-features { list-style: none; margin-bottom: 32px; }
+    .pricing-features li {
+      font-size: 14px; color: #cbd5e1; padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pricing-features li::before {
+      content: '✓'; color: #10b981; font-weight: 700; font-size: 14px;
+    }
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    /* ── Testimonials ─────────────────────────── */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 60px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 28px;
+    }
+    .testimonial-stars { color: #fbbf24; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 15px; color: #cbd5e1; line-height: 1.7;
+      margin-bottom: 20px; font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 600; color: #f8fafc; }
+    .testimonial-role { font-size: 12px; color: #64748b; }
+
+    /* ── FAQ ───────────────────────────────────── */
+    .faq-list {
+      max-width: 720px; margin: 48px auto 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .faq-question {
+      width: 100%; background: none; border: none; color: #f8fafc;
+      font-size: 16px; font-weight: 600; text-align: left;
+      padding: 20px 0; display: flex; justify-content: space-between;
+      align-items: center; cursor: pointer;
+    }
+    .faq-question::after {
+      content: '+'; font-size: 22px; color: #10b981; font-weight: 300;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-question::after { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+    }
+    .faq-answer p {
+      padding: 0 0 20px; font-size: 15px; color: #94a3b8; line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+
+    /* ── CTA ───────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(59,130,246,0.08));
+      border-radius: 24px; padding: 80px 40px; margin: 0 24px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -50%; right: -30%;
+      width: 60%; height: 200%;
+      background: radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, transparent 70%);
+    }
+    .cta-form {
+      display: flex; gap: 12px; max-width: 480px; margin: 32px auto 0;
+      position: relative; z-index: 1;
+    }
+    .cta-form input {
+      flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 14px 18px; color: #f8fafc; font-size: 15px;
+      outline: none;
+    }
+    .cta-form input::placeholder { color: #64748b; }
+    .cta-form input:focus { border-color: #10b981; }
+
+    /* ── Footer ────────────────────────────────── */
+    .footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+    .footer-brand h3 span { color: #10b981; }
+    .footer-brand p { font-size: 14px; color: #64748b; line-height: 1.7; max-width: 300px; }
+    .footer-col h4 {
+      font-size: 13px; font-weight: 700; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 14px; color: #64748b;
+      padding: 4px 0; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #10b981; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 40px; margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      font-size: 13px; color: #475569;
+    }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-socials a {
+      width: 36px; height: 36px; background: rgba(255,255,255,0.05);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: background 0.2s;
+    }
+    .footer-socials a:hover { background: rgba(16,185,129,0.2); color: #10b981; }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 968px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .chat-mockup { margin: 40px auto 0; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .navbar-links { display: none; }
+      .mobile-toggle { display: block; }
+      .features-grid { grid-template-columns: 1fr; }
+      .cta-form { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ Navbar ═══ -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="navbar-logo">🏨 Concierge<span>AI</span></a>
+    <ul class="navbar-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#demo">Demo</a></li>
+    </ul>
+    <div class="navbar-cta">
+      <a href="#pricing" class="btn btn-primary btn-sm">Get Started</a>
+      <button class="mobile-toggle" onclick="document.querySelector('.navbar-links').classList.toggle('show')" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">&#x2728; Now with 30+ language support</div>
+      <h1>Your hotel's <em>AI concierge</em> on WhatsApp</h1>
+      <p>Delight guests with instant, intelligent answers in their language. Powered by AI that knows everything about your hotel&mdash;from room service menus to spa treatments.</p>
+      <div class="hero-buttons">
+        <a href="#pricing" class="btn btn-primary">Start Free Trial &rarr;</a>
+        <a href="#demo" class="btn btn-secondary">&#9654; See It In Action</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">30+</div>
+          <div class="hero-stat-label">Languages</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">&lt;3s</div>
+          <div class="hero-stat-label">Response Time</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">24/7</div>
+          <div class="hero-stat-label">Availability</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="chat-mockup" id="chatMockup">
+        <div class="chat-header">
+          <div class="chat-avatar">🏨</div>
+          <div>
+            <div class="chat-name">Grand Boutique Hotel</div>
+            <div class="chat-status">&#x25CF; Online</div>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="chat-typing" id="chatTyping"><span></span><span></span><span></span></div>
+        </div>
+        <div class="chat-input">
+          <div class="chat-input-field">Type a message...</div>
+          <div class="chat-input-send">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0f172a"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Trust Bar ═══ -->
+<section class="trust-bar">
+  <div class="container">
+    <p>Trusted by boutique hotels worldwide</p>
+    <div class="trust-logos">
+      <div class="trust-logo">THE MAISON</div>
+      <div class="trust-logo">PALAZZO VERDE</div>
+      <div class="trust-logo">HOTEL LUMIERE</div>
+      <div class="trust-logo">CASA AURORA</div>
+      <div class="trust-logo">THE REED</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Features ═══ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">Features</div>
+      <h2 class="section-title animate delay-1">Everything your concierge desk needs, automated</h2>
+      <p class="section-subtitle mx-auto animate delay-2">Powered by Claude AI with hotel-specific knowledge, your virtual concierge handles guest queries around the clock.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card animate">
+        <div class="feature-icon">&#x1F916;</div>
+        <h3>AI Concierge</h3>
+        <p>Powered by Claude, our AI delivers warm, contextual conversations that match your hotel's brand voice and personality.</p>
+      </div>
+      <div class="feature-card animate delay-1">
+        <div class="feature-icon">&#x1F30D;</div>
+        <h3>30+ Languages</h3>
+        <p>Auto-detects guest language and responds naturally. From Japanese to Arabic, your guests always feel at home.</p>
+      </div>
+      <div class="feature-card animate delay-2">
+        <div class="feature-icon">&#x1F4DA;</div>
+        <h3>Knowledge Base</h3>
+        <p>Upload your menus, policies, and FAQs. The AI retrieves accurate information using RAG, never hallucinating.</p>
+      </div>
+      <div class="feature-card animate delay-3">
+        <div class="feature-icon">&#x1F3E8;</div>
+        <h3>Multi-Hotel Support</h3>
+        <p>Manage multiple properties from one dashboard. Each hotel gets isolated data, custom branding, and its own WhatsApp number.</p>
+      </div>
+      <div class="feature-card animate delay-4">
+        <div class="feature-icon">&#x1F91D;</div>
+        <h3>Human Handoff</h3>
+        <p>Detects when guests need human assistance and seamlessly escalates to your staff with full conversation context.</p>
+      </div>
+      <div class="feature-card animate delay-5">
+        <div class="feature-icon">&#x1F4CA;</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Track message volumes, popular topics, languages used, and response times across all your properties.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ How It Works ═══ -->
+<section class="section" id="how-it-works" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">How It Works</div>
+      <h2 class="section-title animate delay-1">Live in under 30 minutes</h2>
+      <p class="section-subtitle mx-auto animate delay-2">No developers needed. Connect your WhatsApp, upload your hotel info, and start delighting guests.</p>
+    </div>
+    <div class="steps">
+      <div class="step animate">
+        <div class="step-number">1</div>
+        <h3>Connect WhatsApp</h3>
+        <p>Link your WhatsApp Business number. We handle all the API setup and webhook configuration for you.</p>
+      </div>
+      <div class="step animate delay-2">
+        <div class="step-number">2</div>
+        <h3>Upload Hotel Info</h3>
+        <p>Add your room details, menus, policies, and FAQs. Our AI indexes everything for instant retrieval.</p>
+      </div>
+      <div class="step animate delay-4">
+        <div class="step-number">3</div>
+        <h3>Go Live</h3>
+        <p>Your AI concierge is ready. Guests message your WhatsApp number and get instant, accurate responses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Demo ═══ -->
+<section class="section demo-section" id="demo">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">Live Demo</div>
+      <h2 class="section-title animate delay-1">Try it yourself</h2>
+      <p class="section-subtitle mx-auto animate delay-2">This is a live demo of the concierge bot for a sample Paris hotel. Ask about rooms, dining, spa, or local attractions.</p>
+    </div>
+    <div class="demo-wrapper animate delay-3">
+      <div class="chat-mockup" style="animation: none;" id="demoChat">
+        <div class="chat-header">
+          <div class="chat-avatar">🏨</div>
+          <div>
+            <div class="chat-name">Grand Boutique Hotel Paris</div>
+            <div class="chat-status">&#x25CF; Online</div>
+          </div>
+        </div>
+        <div class="chat-body" id="demoChatBody" style="min-height: 280px; max-height: 360px; overflow-y: auto;">
+          <div class="chat-msg received" style="opacity:1;">
+            <div>Bonjour! Welcome to our demo. Ask me anything about the hotel!</div>
+            <div class="time">now</div>
+          </div>
+        </div>
+        <div class="chat-input" style="gap: 8px;">
+          <input type="text" id="demoInput" class="chat-input-field" style="background:#0f172a; border:none; border-radius:20px; padding:10px 14px; color:#e2e8f0; font-size:13px; outline:none; flex:1;" placeholder="Try: What rooms do you have?" autocomplete="off" />
+          <button onclick="sendDemoMessage()" id="demoSendBtn" class="chat-input-send" style="border:none; cursor:pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0f172a"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </div>
+      <p style="text-align:center; font-size:12px; color:#475569; margin-top:16px;">
+        Powered by Claude AI &bull; Connects to the local dev server on port 3000
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Pricing ═══ -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">Pricing</div>
+      <h2 class="section-title animate delay-1">Plans that grow with you</h2>
+      <p class="section-subtitle mx-auto animate delay-2">Start with one hotel, scale to your entire portfolio. All plans include a 14-day free trial.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card animate">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price">$199<span>/mo</span></div>
+        <p class="pricing-desc">Perfect for a single boutique property getting started with AI.</p>
+        <ul class="pricing-features">
+          <li>Up to 5 hotels</li>
+          <li>5,000 conversations/mo</li>
+          <li>10 languages</li>
+          <li>Knowledge base (100 docs)</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Start Free Trial</a>
+      </div>
+      <div class="pricing-card popular animate delay-1">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price">$499<span>/mo</span></div>
+        <p class="pricing-desc">For growing hotel groups that need multi-property management.</p>
+        <ul class="pricing-features">
+          <li>Up to 20 hotels</li>
+          <li>25,000 conversations/mo</li>
+          <li>30+ languages</li>
+          <li>Unlimited knowledge base</li>
+          <li>Analytics dashboard</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Start Free Trial</a>
+      </div>
+      <div class="pricing-card animate delay-2">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price">Custom</div>
+        <p class="pricing-desc">For large chains needing PMS integration and dedicated support.</p>
+        <ul class="pricing-features">
+          <li>Unlimited hotels</li>
+          <li>Unlimited conversations</li>
+          <li>30+ languages</li>
+          <li>PMS/CRM integrations</li>
+          <li>Custom AI training</li>
+          <li>Dedicated account manager</li>
+          <li>99.9% SLA</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Testimonials ═══ -->
+<section class="section" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">Testimonials</div>
+      <h2 class="section-title animate delay-1">Loved by hoteliers</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Our Japanese and Chinese guests were amazed they could message us in their own language and get instant, accurate replies. Guest satisfaction scores jumped 40%."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: rgba(59,130,246,0.2); color: #3b82f6;">S</div>
+          <div>
+            <div class="testimonial-name">Sophie Durand</div>
+            <div class="testimonial-role">GM, H&ocirc;tel Lumi&egrave;re &bull; Paris</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate delay-1">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"We reduced front desk calls by 60% in the first month. The bot handles room service orders, spa bookings, and local recommendations flawlessly."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: rgba(16,185,129,0.2); color: #10b981;">M</div>
+          <div>
+            <div class="testimonial-name">Marco Rossi</div>
+            <div class="testimonial-role">Director, Palazzo Verde &bull; Florence</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate delay-2">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Setup took 20 minutes. We uploaded our FAQ doc and the AI immediately started answering guest questions accurately. The ROI was instant."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: rgba(244,63,94,0.2); color: #f43f5e;">A</div>
+          <div>
+            <div class="testimonial-name">Aisha Rahman</div>
+            <div class="testimonial-role">Owner, Casa Aurora &bull; Marrakech</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label animate">FAQ</div>
+      <h2 class="section-title animate delay-1">Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item animate">
+        <button class="faq-question" onclick="toggleFaq(this)">Do I need a WhatsApp Business API account?</button>
+        <div class="faq-answer"><p>Yes, but we handle the entire setup for you. We'll guide you through getting a WhatsApp Business API account via our partner (360dialog), which typically takes 1-2 business days. If you already have one, we can connect to it immediately.</p></div>
+      </div>
+      <div class="faq-item animate delay-1">
+        <button class="faq-question" onclick="toggleFaq(this)">How accurate are the AI responses?</button>
+        <div class="faq-answer"><p>Extremely accurate. The AI only answers from your uploaded knowledge base using RAG (Retrieval Augmented Generation), so it never makes up information. For questions outside its knowledge, it transparently tells the guest and offers to connect them with staff.</p></div>
+      </div>
+      <div class="faq-item animate delay-2">
+        <button class="faq-question" onclick="toggleFaq(this)">How does the translation work?</button>
+        <div class="faq-answer"><p>The system automatically detects the guest's language (30+ supported), translates their question for AI processing, generates an intelligent response, and translates it back. Guests can write in any language &mdash; no configuration needed.</p></div>
+      </div>
+      <div class="faq-item animate delay-3">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I customize the AI's personality?</button>
+        <div class="faq-answer"><p>Absolutely. Each hotel gets a "brand voice" setting where you can define tone, style, and personality. Whether you want formal British elegance or casual beach-resort vibes, the AI adapts to match your brand.</p></div>
+      </div>
+      <div class="faq-item animate delay-4">
+        <button class="faq-question" onclick="toggleFaq(this)">What happens when the AI can't answer a question?</button>
+        <div class="faq-answer"><p>The AI gracefully acknowledges its limitation and offers to connect the guest with your staff. You can configure specific keywords that trigger immediate human handoff, and staff receive the full conversation history for context.</p></div>
+      </div>
+      <div class="faq-item animate delay-5">
+        <button class="faq-question" onclick="toggleFaq(this)">Is guest data secure?</button>
+        <div class="faq-answer"><p>Yes. All data is encrypted at rest and in transit. Conversation sessions auto-expire after 24 hours. We're hosted on AWS with enterprise-grade security, and we never share guest data with third parties.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section" id="cta">
+  <div class="cta-section animate">
+    <div class="section-label">Get Started</div>
+    <h2 class="section-title">Ready to transform your guest experience?</h2>
+    <p class="section-subtitle mx-auto" style="color:#94a3b8;">Join 200+ boutique hotels using AI to delight guests in every language. Start your 14-day free trial &mdash; no credit card required.</p>
+    <form class="cta-form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch shortly.');">
+      <input type="email" placeholder="Enter your work email" required />
+      <button type="submit" class="btn btn-primary">Get Started Free</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🏨 Concierge<span>AI</span></h3>
+        <p>AI-powered WhatsApp concierge for boutique hotels. Delight every guest, in every language, 24/7.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#demo">Demo</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2025 Concierge AI. All rights reserved.</div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Twitter">&#x1D54F;</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="GitHub">&#x2B24;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Navbar scroll effect ─────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Scroll animations ───────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  // ── FAQ toggle ──────────────────────────────
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // ── Hero chat animation ─────────────────────
+  const chatMessages = [
+    { type: 'sent', text: 'Hi! What rooms do you have?', delay: 800 },
+    { type: 'received', text: 'Welcome! We have 4 room types:\n\n• Classic Room (25 sqm) — €350/night\n• Deluxe Room (35 sqm) — €450/night\n• Junior Suite (45 sqm) — €650/night\n• Grand Suite (70 sqm) — €1,200/night\n\nAll include WiFi, Nespresso & minibar!', delay: 2000 },
+    { type: 'sent', lang: 'Espa\u00f1ol', text: '\u00bfTienen servicio de spa?', delay: 3000 },
+    { type: 'received', text: '\u00a1Por supuesto! Nuestro L\'Etoile Spa ofrece:\n\n• Masaje sueco (60 min) — €150\n• Masaje de tejido profundo — €180\n• Facial parisino — €200\n\n\u00a1Los hu\u00e9spedes tienen 15% de descuento!', delay: 4500 },
+    { type: 'sent', lang: '\u65e5\u672c\u8a9e', text: '\u7a7a\u6e2f\u304b\u3089\u306e\u30a2\u30af\u30bb\u30b9\u306f\uff1f', delay: 6000 },
+    { type: 'received', text: '\u3054\u5229\u7528\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01\n\nCDG\u7a7a\u6e2f: \u00a090\u3001\u7d0445\u5206\nOrly\u7a7a\u6e2f: \u00a075\u3001\u7d0435\u5206\n\n\u6700\u5bc4\u99c5: George V (1\u53f7\u7dda) \u5f92\u6b693\u5206\n\n24\u6642\u9593\u524d\u307e\u3067\u306b\u3054\u4e88\u7d04\u304f\u3060\u3055\u3044\u3002', delay: 7500 },
+  ];
+
+  const chatBody = document.getElementById('chatBody');
+  const chatTypingEl = document.getElementById('chatTyping');
+
+  function runChatAnimation() {
+    // Clear previous messages except typing indicator
+    chatBody.querySelectorAll('.chat-msg').forEach(m => m.remove());
+
+    chatMessages.forEach((msg, i) => {
+      setTimeout(() => {
+        // Show typing before bot responses
+        if (msg.type === 'received') {
+          chatTypingEl.style.display = 'block';
+          chatBody.scrollTop = chatBody.scrollHeight;
+          setTimeout(() => {
+            chatTypingEl.style.display = 'none';
+            addChatMsg(msg);
+          }, 800);
+        } else {
+          addChatMsg(msg);
+        }
+      }, msg.delay);
+    });
+
+    // Loop the animation
+    const totalDuration = chatMessages[chatMessages.length - 1].delay + 4000;
+    setTimeout(runChatAnimation, totalDuration);
+  }
+
+  function addChatMsg(msg) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${msg.type === 'sent' ? 'sent' : 'received'}`;
+    let html = '';
+    if (msg.lang) html += `<div class="lang-tag">${msg.lang}</div>`;
+    html += msg.text.replace(/\n/g, '<br>');
+    html += `<div class="time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>`;
+    div.innerHTML = html;
+    chatBody.insertBefore(div, chatTypingEl);
+    // Trigger animation
+    requestAnimationFrame(() => div.classList.add('visible'));
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // Start hero chat animation after a short delay
+  setTimeout(runChatAnimation, 1500);
+
+  // ── Demo chat ───────────────────────────────
+  const demoInput = document.getElementById('demoInput');
+  const demoChatBody = document.getElementById('demoChatBody');
+  const demoSendBtn = document.getElementById('demoSendBtn');
+
+  demoInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendDemoMessage();
+  });
+
+  async function sendDemoMessage() {
+    const text = demoInput.value.trim();
+    if (!text) return;
+
+    // Add user message
+    addDemoMsg(text, 'sent');
+    demoInput.value = '';
+    demoSendBtn.disabled = true;
+
+    // Show typing
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-typing';
+    typingDiv.style.display = 'block';
+    typingDiv.innerHTML = '<span></span><span></span><span></span>';
+    demoChatBody.appendChild(typingDiv);
+    demoChatBody.scrollTop = demoChatBody.scrollHeight;
+
+    try {
+      const res = await fetch('http://localhost:3000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
+      });
+      const data = await res.json();
+      typingDiv.remove();
+      if (data.error) {
+        addDemoMsg('Error: ' + data.error, 'received');
+      } else {
+        addDemoMsg(data.response, 'received');
+      }
+    } catch (err) {
+      typingDiv.remove();
+      addDemoMsg('Connect the local dev server first:\nnpx ts-node scripts/local-server.ts', 'received');
+    }
+    demoSendBtn.disabled = false;
+    demoInput.focus();
+  }
+
+  function addDemoMsg(text, type) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${type}`;
+    div.style.opacity = '1';
+    const formatted = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\n/g, '<br>').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    div.innerHTML = formatted + `<div class="time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>`;
+    demoChatBody.appendChild(div);
+    demoChatBody.scrollTop = demoChatBody.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
